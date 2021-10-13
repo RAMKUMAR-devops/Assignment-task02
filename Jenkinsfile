@@ -11,21 +11,29 @@ pipeline {
         git credentialsId: 'GitHub', url: 'https://github.com/RAMKUMAR-devops/Assignment-task02.git'
     }
     stage('Build Docker Image and Publish to JFrog docker registry'){
-      //  appname = 'simplewebapp'
-       // artifactory_repo = 'ramkumarpudi.jfrog.io'
-             sh "docker build . -t ${IMAGE_URL_WITH_TAG}"
-            // sh "docker build . -t ${appname}"
-            // sh "docker tag ${appname} ${artifactory_repo}/${appname}:latest"
-            // sh "docker login -u admin -p !QAZ1qaz ${artifactory_repo}"
-            // sh "docker push ${artifactory_repo}/${appname}:latest"
-             sh "docker login -u ramkumar.pudi@gmail.com -p !QAZ1qaz ${ARTIFACTORY_URL}"
-             sh "docker push ${IMAGE_URL_WITH_TAG}"
-
+        steps{
+          withCredentials([string(credentialsId: 'nexus-pwd', variable: 'nexusPwd')]) {
+                    sh "docker login -u admin -p ${nexusPwd} ${NEXUS_URL}"
+                    sh "docker push ${IMAGE_URL_WITH_TAG}"
+                }
+        }
 
     }
-    stage{
+    stage('Docker Deploy Dev'){
+            steps{
+                sshagent(['tomcat-dev']) {
+                    withCredentials([string(credentialsId: 'nexus-pwd', variable: 'nexusPwd')]) {
+                        sh "ssh ec2-user@172.31.0.38 docker login -u admin -p ${nexusPwd} ${NEXUS_URL}"
+                    }
+					// Remove existing container, if container name does not exists still proceed with the build
+					sh script: "ssh ec2-user@172.31.0.38 docker rm -f nodeapp",  returnStatus: true
+                    
+                    sh "ssh ec2-user@172.31.0.38 docker run -d -p 8080:8080 --name nodeapp ${IMAGE_URL_WITH_TAG}"
+                }
+            }
+        }
     }
-    }
+    
     def getDockerTag(){
     def tag  = sh script: 'git rev-parse HEAD', returnStdout: true
     return tag
