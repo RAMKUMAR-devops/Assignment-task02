@@ -8,7 +8,8 @@ pipeline {
     stages{
     stage('Git Code Checkout'){
         
-        git credentialsId: 'GitHub', url: 'https://github.com/RAMKUMAR-devops/Assignment-task02.git'
+       // git credentialsId: 'GitHub', url: 'https://github.com/RAMKUMAR-devops/Assignment-task02.git'
+	git credentialsId: 'gitcred', url: 'https://github.com/RAMKUMAR-devops/Assignment-task02.git'
     }
     stage('Build Docker Image and Publish to JFrog docker registry'){
         steps{
