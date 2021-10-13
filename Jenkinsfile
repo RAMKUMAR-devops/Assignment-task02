@@ -6,13 +6,14 @@ pipeline {
         IMAGE_URL_WITH_TAG = "${ARTIFACTORY_URL}/simplewebapp:${DOCKER_TAG}"
     }
     stages{
-    stage('Git Code Checkout'){
-	    steps{
+    //stage('Git Code Checkout'){
+//	    steps{
         
        // git credentialsId: 'GitHub', url: 'https://github.com/RAMKUMAR-devops/Assignment-task02.git'
-	git credentialsId: 'gitcred', url: 'https://github.com/RAMKUMAR-devops/Assignment-task02.git'
-	    }
-    }
+	//git credentialsId: 'gitcred', url: 'https://github.com/RAMKUMAR-devops/Assignment-task02.git'
+	//	    git credentialsId: 'git', url: 'https://github.com/RAMKUMAR-devops/Assignment-task02.git'
+	//    }
+    //}
     stage('Build Docker Image and Publish to JFrog docker registry'){
         steps{
           withCredentials([string(credentialsId: 'nexus-pwd', variable: 'nexusPwd')]) {
