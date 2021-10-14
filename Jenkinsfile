@@ -16,8 +16,11 @@ pipeline {
     //}
 	    stage('Build Docker Image'){
             steps{
-		    sh "docker --version"
-		    sh "docker build . -t ${ARTIFACTORY_URL}/simplewebapp:${BUILD_NUMBER}"
+		    sh "docker build . -t simplewebapp"
+		    sh "docker tag simplewebapp ${ARTIFACTORY_URL}/simplewebapp:${BUILD_NUMBER}"
+		    
+		   // sh "docker --version"
+		   // sh "docker build . -t ${ARTIFACTORY_URL}/simplewebapp:${BUILD_NUMBER}"
             }
         }
 	    
