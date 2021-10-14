@@ -44,6 +44,26 @@ pipeline {
         }    
 	   
        }
+	    stage('deploy'){
+		    steps{
+			sshagent(['ssh-jerkins-user']) {
+    sh 'scp -o StrictHostKeyChecking=no deployment.yml service.yml root@34.224.174.254:/root/'
+script{
+      try{
+       sh 'ssh root@34.224.174.254 kubectl apply -f /root/deployment.yaml'
+	      sh 'ssh root@34.224.174.254 kubectl apply -f /root/service.yaml'
+}catch(error)
+       {
+	      sh 'ssh root@34.224.174.254 kubectl create -f /root/deployment.yaml'
+	       sh 'ssh root@34.224.174.254 kubectl apply -f /root/service.yaml'
+}
+}    
+			    
+			    
+			    
+			    
+		    }
+	    }
 
     //}
     //stage('Docker Deploy Dev'){
