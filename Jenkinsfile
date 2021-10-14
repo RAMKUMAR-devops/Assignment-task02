@@ -3,6 +3,7 @@ pipeline {
     environment{
       //  DOCKER_TAG = getDockerTag()
         ARTIFACTORY_URL  = 'ramkumarpudi.jfrog.io'
+	APP_NAME = 'task'
      //   IMAGE_URL_WITH_TAG = "${ARTIFACTORY_URL}/simplewebapp:${DOCKER_TAG}"
     }
     stages{
@@ -20,7 +21,12 @@ pipeline {
 		  //  sh "docker tag simplewebapp ${ARTIFACTORY_URL}/simplewebapp:${BUILD_NUMBER}"
 		    
 		   // sh "docker --version"
-		    sh "docker build . -t ${ARTIFACTORY_URL}/simplewebapp:${BUILD_NUMBER}"
+		  //  sh "docker build . -t ${ARTIFACTORY_URL}/simplewebapp:${BUILD_NUMBER}"
+		  //  docker tag hello-world ramkumarpudi.jfrog.io/simplewebapp/hello-world
+		    sh "docker build . -t ${APP_NAME}"
+		    sh "docker tag ${APP_NAME} ${ARTIFACTORY_URL}/simplewebapp/${APP_NAME}:${BUILD_NUMBER}"
+             sh "docker login -u admin -p !QAZ1qaz ${ARTIFACTORY_URL}"
+		    sh "docker push ${ARTIFACTORY_URL}/simplewebapp/${APP_NAME}:${BUILD_NUMBER}"
             }
         }
 	    
