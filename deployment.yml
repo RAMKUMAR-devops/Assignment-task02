@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: simplewebapp-deployment
+  labels:
+    app: simplewebapp
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: simplewebapp
+  template:
+    metadata:
+      labels:
+        app: simplewebapp
+    spec:
+      containers:
+      - name: simplewebapp
+        image: pudi-docker.jfrog.io/simplewebapp:latest
+        ports:
+        - containerPort: 80
+      imagePullSecrets:
+      - name: regcred
