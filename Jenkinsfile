@@ -24,7 +24,7 @@ pipeline {
 		  //  sh "docker build . -t ${ARTIFACTORY_URL}/simplewebapp:${BUILD_NUMBER}"
 		  //  docker tag hello-world ramkumarpudi.jfrog.io/simplewebapp/hello-world
 		    sh "docker build . -t ${APP_NAME}"
-		    sh "docker tag ${APP_NAME} ${ARTIFACTORY_URL}/simplewebapp/${APP_NAME}:${BUILD_NUMBER}"
+		    sh "docker tag ${APP_NAME} ${ARTIFACTORY_URL}/simplewebapp/${APP_NAME}:latest"
            //  sh "docker login -u admin -p !QAZ1qaz ${ARTIFACTORY_URL}"
 		 //   sh "docker push ${ARTIFACTORY_URL}/simplewebapp/${APP_NAME}:${BUILD_NUMBER}"
             }
@@ -38,7 +38,7 @@ pipeline {
                //}
 	   withCredentials([usernamePassword(credentialsId: 'jfrogcred', passwordVariable: 'jfrogpasswd', usernameVariable: 'jfroguser')]) {
 		   sh "docker login -u ${jfroguser} -p ${jfrogpasswd} ${ARTIFACTORY_URL}"
-		   sh "docker push ${ARTIFACTORY_URL}/simplewebapp/${APP_NAME}:${BUILD_NUMBER}"
+		   sh "docker push ${ARTIFACTORY_URL}/simplewebapp/${APP_NAME}:latest"
                  //  sh "docker push ${ARTIFACTORY_URL}/simplewebapp:${BUILD_NUMBER}"
 		  // sh "docker push ${ARTIFACTORY_URL}/default-docker-virtual/${ARTIFACTORY_URL}/simplewebapp:${BUILD_NUMBER}"
         }    
