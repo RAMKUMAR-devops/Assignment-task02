@@ -50,7 +50,7 @@ pipeline {
 	
 	    
 	    //sh 'echo "hi" '
-		    }
+		    
             }
         }
     }
