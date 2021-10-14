@@ -1,5 +1,5 @@
 pipeline {
-    agent slavenode
+    agent any
     environment{
       //  DOCKER_TAG = getDockerTag()
         ARTIFACTORY_URL  = 'ramkumarpudi.jfrog.io'
