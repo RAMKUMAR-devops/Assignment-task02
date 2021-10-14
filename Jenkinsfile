@@ -1,9 +1,9 @@
 pipeline {
     agent any
     environment{
-        DOCKER_TAG = getDockerTag()
+      //  DOCKER_TAG = getDockerTag()
         ARTIFACTORY_URL  = 'ramkumarpudi.jfrog.io'
-        IMAGE_URL_WITH_TAG = "${ARTIFACTORY_URL}/simplewebapp:${DOCKER_TAG}"
+     //   IMAGE_URL_WITH_TAG = "${ARTIFACTORY_URL}/simplewebapp:${DOCKER_TAG}"
     }
     stages{
     //stage('Git Code Checkout'){
@@ -16,7 +16,7 @@ pipeline {
     //}
 	    stage('Build Docker Image'){
             steps{
-                sh "docker build . -t ${IMAGE_URL_WITH_TAG}"
+		    sh "docker build . -t ${ARTIFACTORY_URL}/simplewebapp:${BUILD_NUMBER}"
             }
         }
 	    
@@ -55,7 +55,7 @@ pipeline {
         }
     }
     
-    def getDockerTag(){
-    def tag  = sh script: 'git rev-parse HEAD', returnStdout: true
-    return tag
-    }
+   // def getDockerTag(){
+   // def tag  = sh script: 'git rev-parse HEAD', returnStdout: true
+  //  return tag
+    //}
