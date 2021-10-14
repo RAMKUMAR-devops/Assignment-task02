@@ -16,11 +16,11 @@ pipeline {
     //}
 	    stage('Build Docker Image'){
             steps{
-		    sh "docker build . -t simplewebapp"
-		    sh "docker tag simplewebapp ${ARTIFACTORY_URL}/simplewebapp:${BUILD_NUMBER}"
+		   // sh "docker build . -t simplewebapp"
+		  //  sh "docker tag simplewebapp ${ARTIFACTORY_URL}/simplewebapp:${BUILD_NUMBER}"
 		    
 		   // sh "docker --version"
-		   // sh "docker build . -t ${ARTIFACTORY_URL}/simplewebapp:${BUILD_NUMBER}"
+		    sh "docker build . -t ${ARTIFACTORY_URL}/simplewebapp:${BUILD_NUMBER}"
             }
         }
 	    
@@ -32,7 +32,8 @@ pipeline {
                //}
 	   withCredentials([usernamePassword(credentialsId: 'jfrogcred', passwordVariable: 'jfrogpasswd', usernameVariable: 'jfroguser')]) {
 		   sh "docker login -u ${jfroguser} -p ${jfrogpasswd} ${ARTIFACTORY_URL}"
-                   sh "docker push ${ARTIFACTORY_URL}/simplewebapp:${BUILD_NUMBER}"
+                   //sh "docker push ${ARTIFACTORY_URL}/simplewebapp:${BUILD_NUMBER}"
+		   sh "docker push ${ARTIFACTORY_URL}/default-docker-virtual/${ARTIFACTORY_URL}/simplewebapp:${BUILD_NUMBER}"
         }    
 	   
        }
