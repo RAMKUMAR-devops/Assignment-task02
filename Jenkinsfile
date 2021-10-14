@@ -16,6 +16,7 @@ pipeline {
     //}
 	    stage('Build Docker Image'){
             steps{
+		    sh "docker --version"
 		    sh "docker build . -t ${ARTIFACTORY_URL}/simplewebapp:${BUILD_NUMBER}"
             }
         }
