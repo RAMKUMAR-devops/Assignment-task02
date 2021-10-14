@@ -48,7 +48,8 @@ pipeline {
 	    stage('deploy'){
 		    steps{
 			sshagent(['ssh-jerkins-user']) {
-    sh 'scp -o StrictHostKeyChecking=no deployment.yml service.yml root@34.224.174.254:/root/'
+    sh 'scp -o StrictHostKeyChecking=no deployment.yml service.yml root@34.224.174.254:/root'
+				sh 'ls -la'
 script{
       try{
        sh 'ssh root@34.224.174.254 kubectl apply -f /root/deployment.yaml'
