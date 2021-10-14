@@ -52,12 +52,12 @@ pipeline {
 				sh 'ls -la'
 script{
       try{
-       sh 'ssh root@34.224.174.254 kubectl apply -f /root/deployment.yaml'
-	      sh 'ssh root@34.224.174.254 kubectl apply -f /root/service.yaml'
+       sh 'ssh root@34.224.174.254 kubectl apply -f deployment.yml'
+	      sh 'ssh root@34.224.174.254 kubectl apply -f service.yaml'
 }catch(error)
        {
-	      sh 'ssh root@34.224.174.254 kubectl create -f /root/deployment.yaml'
-	       sh 'ssh root@34.224.174.254 kubectl apply -f /root/service.yaml'
+	      sh 'ssh root@34.224.174.254 kubectl create -f deployment.yml'
+	      sh 'ssh root@34.224.174.254 kubectl apply -f service.yaml'
 }
 }    
 			    
