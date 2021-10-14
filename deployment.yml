@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: simplewebapp
-        image: pudi-docker.jfrog.io/simplewebapp:latest
+        image: ramkumarpudi.jfrog.io/simplewebapp/task:latest
         ports:
         - containerPort: 80
       imagePullSecrets:
