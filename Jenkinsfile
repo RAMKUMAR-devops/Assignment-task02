@@ -44,6 +44,7 @@ pipeline {
         }    
 	   
        }
+    }
 	    stage('deploy'){
 		    steps{
 			sshagent(['ssh-jerkins-user']) {
