@@ -28,7 +28,7 @@ pipeline {
                //}
 	   withCredentials([usernamePassword(credentialsId: 'jfrogcred', passwordVariable: 'jfrogpasswd', usernameVariable: 'jfroguser')]) {
 		   sh "docker login -u ${jfroguser} -p ${jfrogpasswd} ${ARTIFACTORY_URL}"
-                   sh "docker push ${IMAGE_URL_WITH_TAG}"
+                   sh "docker push ${ARTIFACTORY_URL}/simplewebapp:${BUILD_NUMBER}"
         }    
 	   
        }
