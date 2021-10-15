@@ -8,7 +8,7 @@ pipeline {
     }
     stages{
    
-	    stage('Build Docker Image'){
+	    stage('Build and tag Docker Image'){
             steps{
 		   
 		    sh "docker build . -t ${APP_NAME}"
@@ -17,7 +17,7 @@ pipeline {
             }
         }
 	    
-    stage('Build Docker Image and Publish to JFrog docker registry'){
+    stage('Publish Docker image to JFrog docker registry'){
        steps{
        
 	   withCredentials([usernamePassword(credentialsId: 'jfrogcred', passwordVariable: 'jfrogpasswd', usernameVariable: 'jfroguser')]) {
@@ -28,7 +28,7 @@ pipeline {
 	   
        }
     }
-	    stage('deploy'){
+	    stage('Deployment in kubernetes cluster'){
 		    steps{
 			sshagent(['ssh-jerkins-user']) {
     sh 'scp -o StrictHostKeyChecking=no deployment.yml service.yml root@34.224.174.254:/root'
