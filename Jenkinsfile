@@ -31,27 +31,23 @@ pipeline {
 	    stage('Deployment in kubernetes cluster'){
 		    steps{
 			sshagent(['ssh-jerkins-user']) {
-    sh 'scp -o StrictHostKeyChecking=no deployment.yml service.yml root@34.224.174.254:/root'
-				sh 'ls -la'
-script{
-      try{
-       sh 'ssh root@34.224.174.254 kubectl apply -f deployment.yml'
-	      sh 'ssh root@34.224.174.254 kubectl apply -f service.yml'
-}catch(error)
-       {
-	      sh 'ssh root@34.224.174.254 kubectl create -f deployment.yml'
-	      sh 'ssh root@34.224.174.254 kubectl apply -f service.yml'
-}
-}    
-			    
-			    
-			    
-			    
-		    }
+                                sh 'scp -o StrictHostKeyChecking=no deployment.yml service.yml root@34.224.174.254:/root'
+				//sh 'ls -la'
+                    script{
+                         try{
+                           sh 'ssh root@34.224.174.254 kubectl apply -f deployment.yml'
+	                   sh 'ssh root@34.224.174.254 kubectl apply -f service.yml'
+                             }
+			 catch(error)
+                           {
+	                   sh 'ssh root@34.224.174.254 kubectl create -f deployment.yml'
+	                   sh 'ssh root@34.224.174.254 kubectl apply -f service.yml'
+                            }
+                  }    
+			 	    
+	      }
 	    }
-
-   
-		    
+	    
             }
         }
     }
