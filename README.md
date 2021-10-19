@@ -10,8 +10,8 @@ Services/Tools used:
 Steps:  
 1.Create a sample index.html to deploy in apache server.  
 2.Create Jenkinsfile of declarative pipeline with stages Build and tag docker image ,Push docker image to Jfrog artifactory,deploy the docker image in kubernetes cluster.
-<img width="1680" alt="jenkins pipeline" src="https://user-images.githubusercontent.com/59164612/137497929-d7539683-67fc-44ea-9a17-5714f25bb7be.png">
-<img width="1680" alt="jenkins pipleine2" src="https://user-images.githubusercontent.com/59164612/137498017-935052e0-ddc5-4e5f-8ff2-5c6beded8072.png">
+<img width="1133" alt="updated jenkins" src="https://user-images.githubusercontent.com/59164612/137919131-08ccbdd0-0afa-4f4d-8a02-686b69d939cb.png">
+<img width="1133" alt="updatedjenkins2" src="https://user-images.githubusercontent.com/59164612/137919239-cabc8d89-0a42-4ac2-8764-7fd3b97a6806.png">
   i.Create webhook in github inorder to build the respective jenkins pipline whenever commit happens in github.
   <img width="1680" alt="github-webhook" src="https://user-images.githubusercontent.com/59164612/137497555-59bfc3dc-b996-4d2d-ad62-0e217a3dc4a0.png">
 3.Create the kubernetes cluster in aws console using kops method.
