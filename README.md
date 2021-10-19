@@ -1,7 +1,14 @@
 # Assignment-task02
-Write pipeline-as-code to deploy containerised application. You can choose any sample application written in java, nodejs or php.
-Solution:
-1.Create a sample index.html to deploy in apache server.
+Write pipeline-as-code to deploy containerised application. You can choose any sample application written in java, nodejs or php.  
+Solution:  
+Services/Tools used:  
+1.Jenkins. 
+2.Docker.  
+3.Kubernetes.  
+4.AWS EC2 servers.  
+5.Jfrog artifactory.  
+Steps:  
+1.Create a sample index.html to deploy in apache server.  
 2.Create Jenkinsfile of declarative pipeline with stages Build and tag docker image ,Push docker image to Jfrog artifactory,deploy the docker image in kubernetes cluster.
 <img width="1680" alt="jenkins pipeline" src="https://user-images.githubusercontent.com/59164612/137497929-d7539683-67fc-44ea-9a17-5714f25bb7be.png">
 <img width="1680" alt="jenkins pipleine2" src="https://user-images.githubusercontent.com/59164612/137498017-935052e0-ddc5-4e5f-8ff2-5c6beded8072.png">
