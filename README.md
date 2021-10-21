@@ -2,7 +2,7 @@
 Write pipeline-as-code to deploy containerised application. You can choose any sample application written in java, nodejs or php.  
 Solution:  
 Services/Tools used:  
-1.html. 
+1.html.   
 2.Jenkins and Docker.  
 3.Kubernetes cluster in AWS ec2 servers.  
 4.Jfrog artifactory .  
@@ -10,16 +10,16 @@ Services/Tools used:
 
 Steps:  
 1.Create a sample index.html which we have to deploy in apache server i.e.., httpd server.  
-2.Provision an ec2 server and install Jenkins in it, which we can treat as master node . Add a slave node to the master node where the jobs can be scheduled by the master node. 
-  i.Create Jenkinsfile of declarative pipeline with stages Build the docker image and tag docker image ,Push docker image to Jfrog artifactory,deploy the docker image in kubernetes cluster.  
-  ii.The sample html file will be converted to docker image using the below code in the docker file :
-  FROM centos:latest
-  RUN yum update -y
-  RUN yum install httpd -y
-  COPY index.html /var/www/html/index.html
-  EXPOSE 80
-  ENTRYPOINT ["/usr/sbin/httpd", "-D", "FOREGROUND"]. 
-  iii.The built docker image is tagged and pushed to jfrog artifactory (for storing the docker image).
+2.Provision an ec2 server and install Jenkins in it, which we can treat as master node . Add a slave node to the master node where the jobs can be scheduled by the master node.  
+i.Create Jenkinsfile of declarative pipeline with stages Build the docker image and tag docker image ,Push docker image to Jfrog artifactory,deploy the docker image in kubernetes cluster.  
+  ii.The sample html file will be converted to docker image using the below code in the docker file :  
+  FROM centos:latest  
+  RUN yum update -y  
+  RUN yum install httpd -y   
+  COPY index.html /var/www/html/index.html   
+  EXPOSE 80  
+  ENTRYPOINT ["/usr/sbin/httpd", "-D", "FOREGROUND"].   
+  iii.The built docker image is tagged and pushed to jfrog artifactory (for storing the docker image).  
   iv.The docker image is pulled and deployed into the kubernetes cluster.
 <img width="1133" alt="updated jenkins" src="https://user-images.githubusercontent.com/59164612/137919131-08ccbdd0-0afa-4f4d-8a02-686b69d939cb.png">
 <img width="1133" alt="updatedjenkins2" src="https://user-images.githubusercontent.com/59164612/137919239-cabc8d89-0a42-4ac2-8764-7fd3b97a6806.png">
