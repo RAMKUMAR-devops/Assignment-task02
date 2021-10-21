@@ -5,7 +5,7 @@ Services/Tools used:
 1.html.   
 2.Jenkins and Docker.  
 3.Kubernetes cluster in AWS ec2 servers.  
-4.Jfrog artifactory .  
+4.Jfrog artifactory repository to store the docker images.  
 5.Deployment and service manifest files to deploy the docker image and to expose.
 
 Steps:  
